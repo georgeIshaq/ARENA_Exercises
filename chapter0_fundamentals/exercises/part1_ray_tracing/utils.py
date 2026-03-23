@@ -26,6 +26,7 @@ def setup_widget_fig_ray() -> go.FigureWidget:
     fig = go.FigureWidget(go.Scatter(x=[], y=[]))
     fig.add_scatter(x=[], y=[], mode="markers", marker_size=12, name="v=0")
     fig.add_scatter(x=[], y=[], mode="markers", marker_size=12, marker_symbol="x", name="v=1")
+
     fig.update_layout(
         title="Ray coordinates illustration",
         showlegend=False,
