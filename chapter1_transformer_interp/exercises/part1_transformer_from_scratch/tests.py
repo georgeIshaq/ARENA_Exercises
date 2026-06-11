@@ -12,11 +12,13 @@ if str(exercises_dir) not in sys.path:
 def test_layer_norm_epsilon(layer_norm, cache):
     import part1_transformer_from_scratch.solutions as solutions
     cfg = solutions.Config(layer_norm_eps=0.1)
+    device = cache.device
     
     # dont worry about different weights at initialisation
     # gamma init to 1, beta init to 0
-    expected = solutions.LayerNorm(cfg)(cache.clone())
-    actual = layer_norm(cfg)(cache.clone())
+    cache_clone = cache.clone().to(device)
+    expected = solutions.LayerNorm(cfg).to(device)(cache_clone)
+    actual = layer_norm(cfg).to(device)(cache_clone)
     t.testing.assert_close(expected, actual, msg = "LayerNorm: Is your epsilon inside the sqrt?")
 
 def test_causal_mask(apply_causal_mask):
